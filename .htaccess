@@ -1,0 +1,20 @@
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "(config\.php|auth\.php|\.sql)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Block direct access to includes folder
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^includes/ - [F,L]
+</IfModule>
+
+# PHP settings for InfinityFree
+php_flag display_errors Off
+php_value upload_max_filesize 2M
+php_value post_max_size 8M
+php_value max_execution_time 30
+php_value session.cookie_httponly 1
